@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KSAU BMI Calculator</title>
+    <link rel="stylesheet" href="BMI's homepage.css">
+</head>
+<body>
+    <header id="header">
+        <a href="">
+            <img src="Ksau-hslogo.png" id="KSAU_logo">
+        </a>
+        <a href="">
+            <img src="conference3.png" id="conference">
+        </a>
+        <a href="Calories Calculator.html" id="calories">
+            KSAU Calories Calculator
+        </a>
+      
+    </header>
+    <section style="background-color:#F9F9F9;height:1000px">
+        <img src="symbol1.png" id="symbol1">
+        <img src="symbol1.png" id="symbol2">
+        <img src="symbol1.png" id="symbol3">
+        <img src="symbol1.png" id="symbol4">
+        <h1 style="color:green" id="BMI">BMI Calculator</h1>
+        <div id="form">
+            <p>
+                 عملية حسابية تقوم على حساب كتلة الجسم للشخص (ذكر /أنثى) بناء على عدة عوامل مثل الطول الوزن وحساب كتلة الجسم هى معلومة مفيدة من أجل تحديد الوزن الطبيعى للجسم
+            </p>
+            <form onsubmit="calculateBMI(event)">
+                <label for="Weight" style="font-size:20pt"><b>ادخل الوزن (كجم)</b></label>
+                <br>
+                <input type="text" id="Weight" style="border:4px solid green;border-radius:40px; margin-top:10px; width:200px; height:30px;font-size:16pt">
+                <br>
+                <label for="Height" style="font-size:20pt;margin:10px"><b>ادخل الطول (سم)</b></label>
+                <br>
+                <input type="text" id="Height" style="border:4px solid green;border-radius:40px; margin-top:10px; width:200px; height:30px; font-size:16pt">
+                <br>
+                <input type="submit" value="احسب"  style="background-color:Green; border-radius:40px; margin-top:10px; width:200px; height:30px; font-size:12pt;color:white" id="submit"></input>
+            </form>
+            <div id="result" style="margin-top: 50px;">
+                <h2>
+                    كتلة جسمك هي
+                </h2>
+                <h3></h3>
+                <h4></h4>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function calculateBMI(event) {
+            event.preventDefault(); 
+
+            var weight = parseFloat(document.getElementById('Weight').value);
+            var height = parseFloat(document.getElementById('Height').value);
+
+            var bmi = weight / ((height / 100) * (height / 100));
+
+            var resultContainer = document.getElementById('result');
+            resultContainer.querySelector('h3').innerText = "BMI: " + bmi.toFixed(2);
+            
+            var interpretation = "غير معروف";
+            if (bmi < 18.5) {
+                interpretation = "نقص في الوزن: الوزن دون الحد الأدنى المثالي للصحة";
+            } else if (bmi < 25) {
+                interpretation = "وزن طبيعي: الوزن معتدل ومتوافق مع الطول";
+            } else if (bmi < 30) {
+                interpretation = "زيادة في الوزن: الوزن يزيد عن الحدود المثالية للصحة";
+            } else {
+                interpretation = "سمنة: الوزن أعلى بشكل ملحوظ عن الحد الأعلى للصحة";
+            }
+            resultContainer.querySelector('h4').innerText = "التفسير: " + interpretation;
+        }
+
+        window.addEventListener('scroll', function() {
+            var header = document.getElementById('header');
+            if (window.scrollY > 0) {
+                header.classList.add('scroll');
+            } else {
+                header.classList.remove('scroll');
+            }
+        });
+    </script>
+</body>
+</html>

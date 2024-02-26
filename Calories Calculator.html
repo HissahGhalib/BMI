@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KSAU Calories Calculator</title>
+    <link rel="stylesheet" href="Calories's homepage.css">
+</head>
+<body>
+    <header id="header">
+        <a href="">
+            <img src="Ksau-hslogo.png" id="KSAU_logo">
+        </a>
+        <a href="">
+            <img src="conference3.png" id="conference">
+        </a>
+        <a href="BMI's Homepage.html" id="BMITEXT">
+            KSAU BMI Calculator
+        </a>
+      
+    </header>
+    <section style="background-color:#F9F9F9;height:1200px">
+        <img src="symbol1.png" id="symbol1">
+        <img src="symbol1.png" id="symbol2">
+        <img src="symbol1.png" id="symbol3">
+        <img src="symbol1.png" id="symbol4">
+        <h1 style="color:green" id="Calories">Calories Calculator</h1>
+        <div id="form">
+            <p>
+                عملية حسابية تقوم على حساب عدد السعرات الحرارية المستهلكة يومياً للشخص (ذكر /أنثى) بناءً على عدة عوامل مثل الوزن، والطول، والعمر، ونوع النشاط اليومي البدني.
+            </p>
+            <form onsubmit="calculateCalories(event)">
+                <label for="Weight" style="font-size:20pt"><b>ادخل الوزن (كجم)</b></label>
+                <br>
+                <input type="text" id="Weight" style="border:4px solid green;border-radius:40px; margin-top:10px; width:200px; height:30px;font-size:16pt">
+                <br>
+                <label for="Height" style="font-size:20pt;margin:10px"><b>ادخل الطول (سم)</b></label>
+                <br>
+                <input type="text" id="Height" style="border:4px solid green;border-radius:40px; margin-top:10px; width:200px; height:30px; font-size:16pt">
+                <br>
+                <label for="Age" style="font-size:20pt;margin:10px"><b>العمر</b></label>
+                <br>
+                <input type="text" id="Age" style="border:4px solid green;border-radius:40px; margin-top:10px; width:200px; height:30px; font-size:16pt">
+                <br>
+                <label for="Gender" style="font-size:20pt;margin:10px"><b>الجنس</b></label>
+                <br>
+                <select id="Gender" style="border:4px solid green;border-radius:40px; margin-top:10px; width:200px; height:35px; font-size:16pt">
+                    <option value="male">ذكر</option>
+                    <option value="female">أنثى</option>
+                </select>
+                <br>
+                <label for="ActivityLevel" style="font-size:20pt;margin:10px"><b>معدل النشاط البدني</b></label>
+                <br>
+                <select id="ActivityLevel" style="border:4px solid green;border-radius:40px; margin-top:10px; width:200px; height:35px; font-size:16pt">
+                    <option value="1.2">قليل النشاط</option>
+                    <option value="1.375">نشاط خفيف</option>
+                    <option value="1.55">نشاط متوسط</option>
+                    <option value="1.725">نشاط شديد</option>
+                    <option value="1.9">نشاط شديد جداً</option>
+                </select>
+                <br>
+                <input type="submit" value="احسب"  style="background-color:Green; border-radius:40px; margin-top:10px; width:200px; height:30px; font-size:12pt;color:white" id="submit"></input>
+            </form>
+            <div id="result" style="margin-top: 50px;">
+                <h2>
+                    السعرات الحرارية المحتاجة يوميًا
+                </h2>
+                <h3></h3>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function calculateCalories(event) {
+            event.preventDefault(); 
+
+            var weight = parseFloat(document.getElementById('Weight').value);
+            var height = parseFloat(document.getElementById('Height').value);
+            var age = parseFloat(document.getElementById('Age').value);
+            var gender = document.getElementById('Gender').value;
+            var activityLevel = parseFloat(document.getElementById('ActivityLevel').value);
+
+            var bmr;
+            if (gender === 'male') {
+                bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+            } else {
+                bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+            }
+
+            var caloriesNeeded = bmr * activityLevel;
+
+            var resultContainer = document.getElementById('result');
+            resultContainer.querySelector('h3').innerText = "السعرات الحرارية المحتاجة يوميًا: " + caloriesNeeded.toFixed(2);
+        }
+
+        window.addEventListener('scroll', function() {
+            var header = document.getElementById('header');
+            if (window.scrollY > 0) {
+                header.classList.add('scroll');
+            } else {
+                header.classList.remove('scroll');
+            }
+        });
+    </script>
+</body>
+</html>
